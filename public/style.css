@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #007BFF; /* Primary color for the header */
+    color: #fff; /* Text color in the header */
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center; /* Center the navigation links */
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white; /* Link color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make the link text bold */
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333; /* Dark color for headings */
+}
+
+main {
+    max-width: 800px; /* Max width for the main content */
+    margin: 20px auto; /* Center the main content */
+    padding: 20px;
+    background: white; /* White background for main content */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+section {
+    margin-bottom: 20px; /* Space between sections */
+}
+
+ul {
+    padding-left: 20px;
+}
+
+footer {
+    text-align: center;
+    background: #333; /* Dark background for footer */
+    color: white; /* White text in footer */
+    padding: 10px 0;
+}
+
+footer p {
+    margin: 0; /* Remove margin from footer text */
+}

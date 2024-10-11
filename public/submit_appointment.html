@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - Dental Practice</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .success-message, .error-message {
+            font-weight: bold;
+        }
+        .success-message {
+            color: green;
+            display: none;
+        }
+        .error-message {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>Book Your Appointment</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="appointment.html">Book Appointment</a></li>
+                    <li><a href="staff.html">Staff Area</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <section class="appointment-info">
+            <div class="container">
+                <h2>Schedule Your Visit</h2>
+                <p>Booking an appointment with us is easy! Please fill out the form below to schedule your visit.</p>
+                
+                <form id="appointmentForm">
+                    <label for="patientName">Full Name:</label>
+                    <input type="text" id="patientName" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" required>
+
+                    <label for="appointmentType">Appointment Type:</label>
+                    <select id="appointmentType" name="appointment_type" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="general_dentistry">General Dentistry</option>
+                        <option value="cosmetic_dentistry">Cosmetic Dentistry</option>
+                        <option value="orthodontics">Orthodontics</option>
+                        <option value="emergency_care">Emergency Dental Care</option>
+                        <option value="oral_surgery">Oral Surgery</option>
+                        <option value="pediatric_dentistry">Pediatric Dentistry</option>
+                    </select>
+
+                    <label for="appointmentDate">Preferred Date:</label>
+                    <input type="date" id="appointmentDate" name="date" required>
+
+                    <label for="appointmentTime">Preferred Time:</label>
+                    <input type="time" id="appointmentTime" name="time" required>
+
+                    <label for="comments">Additional Comments:</label>
+                    <textarea id="comments" name="comments" rows="4" placeholder="Any specific requests or questions?"></textarea>
+
+                    <button type="submit">Book Appointment</button>
+                </form>
+
+                <!-- Success/Error Message -->
+                <p id="confirmationMessage" class="success-message">Appointment booked successfully!</p>
+                <p id="errorMessage" class="error-message">There was an error booking your appointment. Please try again.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Dental Practice. All rights reserved.</p>
+            <p>Email: <a href="mailto:stfessop@gmail.com">stfessop@gmail.com</a> | Phone: <a href="tel:0728586715">0728586715</a></p>
+            <p>Address: 34 Main Road, Goodwood</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for handling form submission -->
+    <script>
+        document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from reloading the page
+            
+            const formData = new FormData(this); // Get form data
+            
+            fetch('/submit-appointment', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    // Show success message
+                    document.getElementById('confirmationMessage').style.display = 'block';
+                    document.getElementById('errorMessage').style.display = 'none';
+                    this.reset(); // Reset form fields after successful submission
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Show error message
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('confirmationMessage').style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

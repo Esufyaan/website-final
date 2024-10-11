@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Appointments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Future Appointments</h1>
+    <table id="appointmentTable">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Patient Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Appointment Date</th>
+                <th>Appointment Time</th>
+                <th>Service</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Appointment rows will be populated here by JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchFutureAppointments() {
+            try {
+                const response = await fetch('/staff/future-appointments');
+                const appointments = await response.json();
+                const tableBody = document.querySelector('#appointmentTable tbody');
+
+                tableBody.innerHTML = ''; // Clear existing rows
+
+                appointments.forEach((appointment, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${appointment.name}</td>
+                        <td>${appointment.email}</td>
+                        <td>${appointment.phone || 'N/A'}</td>
+                        <td>${new Date(appointment.date).toLocaleDateString()}</td>
+                        <td>${appointment.time}</td>
+                        <td>${appointment.appointment_type || 'N/A'}</td>
+                        <td>${appointment.comments || 'N/A'}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching future appointments:', error);
+            }
+        }
+
+        window.onload = fetchFutureAppointments;
+    </script>
+</body>
+</html>

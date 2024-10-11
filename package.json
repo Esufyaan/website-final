@@ -1,0 +1,19 @@
+{
+  "name": "website-proper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@faker-js/faker": "^9.0.3",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.1",
+    "faker": "^6.6.6",
+    "mysql2": "^3.11.3"
+  }
+}
